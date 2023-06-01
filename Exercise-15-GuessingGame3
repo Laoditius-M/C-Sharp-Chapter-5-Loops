@@ -1,0 +1,110 @@
+/* Exercise 15 - GuessingGame3
+In Chapter 4, you created a program that generates a random number, allows a
+user to guess it, and displays a message indicating whether the guess is too
+low, too high, or correct. Now, create a modified program called GuessingGame2
+in which the user can continue to enter values until the correct guess is made.
+After the user guesses correctly, display the number of guesses made.
+*/
+//Programmer: ProgrammerFromMars
+
+using System;
+using static System.Console;
+namespace Exercise15
+{
+  class GuessingGame3
+  {
+    static void Main(string[] args)
+    {
+      // Variable Declaration
+      Random rndNumberGenerator = new Random(); //Random number method
+      int randomNumber = 0; //Store the random number
+      int userGuess = 0; //Store the user's number
+      int prevGuess = 0; //Store previous guess
+      int numGuesses = 0;
+      
+      //Generate a random number
+      randomNumber = rndNumberGenerator.Next(1, 11);
+      
+      do
+      {
+        //Get a number from the user - Change sentinel value (User input)
+        Write("Enter your guess(1-10) >> ");
+        userGuess = Convert.ToInt32(ReadLine());
+        numGuesses++;
+        prevGuess = userGuess;
+        
+        //Check if the userGuess is Equal to, Lower or higher than the random number
+        if (userGuess == randomNumber)
+        {
+        WriteLine($"\nCorrect Guess: The number is {randomNumber}.");
+        }
+        else if (userGuess < randomNumber)
+        {
+          WriteLine("Incorrect Guess: Your number is too LOW\n");
+          //Get a number from the user - Change sentinel value (User input)
+          do
+          {
+            Write("\nEnter your guess(1-10) >> ");
+            userGuess = Convert.ToInt32(ReadLine());
+            numGuesses++;
+            
+            //User entered the same low number or number greater than previous but lower than answer
+            if (userGuess == prevGuess || ((userGuess > prevGuess) && (userGuess < randomNumber)))
+            {
+              WriteLine("Incorrect Guess: Your number is too LOW");
+              prevGuess = userGuess;
+            }
+            else if (userGuess < prevGuess)
+            {
+              //User entered a number lower the previous low number
+              WriteLine("Oops. i said your guess is lower, why go lower than {0}?", prevGuess);
+            }
+            
+            //User guessed the correct number
+            if (userGuess == randomNumber)
+            {
+              WriteLine($"Correct Guess: The number is {randomNumber}.");
+            }
+          } while (userGuess <= prevGuess);
+        }
+        else if (userGuess > randomNumber)
+        {
+          WriteLine("Incorrect Guess: Your number is too HIGH");
+          do
+          {
+            //Get a number from the user - Change sentinel value (User input)
+            Write("\nEnter your guess(1-10) >> ");
+            userGuess = Convert.ToInt32(ReadLine());
+
+            //Increment number of guesses
+            numGuesses++;
+
+            //User entered the same number as the previous number or a number less than the
+            //previous and greater than the correct number
+            if (userGuess == prevGuess || ((userGuess < prevGuess) && (userGuess > randomNumber)))
+            {
+              WriteLine("Incorrect Guess: Your number is too HIGH");
+              prevGuess = userGuess;
+            }
+            else if (userGuess > prevGuess)
+            {
+              //User entered a number greater the previous guessed number
+              WriteLine("Oops. I said your guess is high, why go higher than {0}?", prevGuess);
+            }
+
+            //User guessed the correct number
+            if (userGuess == randomNumber)
+            {
+              WriteLine($"\nCorrect Guess: The number is {randomNumber}.");
+            }
+          } while (userGuess >= prevGuess);
+        }
+      } while (userGuess != randomNumber);
+      
+      //Display the number of guesses
+      WriteLine("\nNumber of Guesses: {0}", numGuesses);
+
+      ReadLine(); //System Pause
+    }
+  }
+}
