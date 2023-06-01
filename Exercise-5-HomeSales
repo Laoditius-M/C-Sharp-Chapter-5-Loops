@@ -1,0 +1,105 @@
+/* Exercise 5 - HomeSales
+Danielle, Edward, and Francis are three salespeople at Holiday Homes. Write an
+application named HomeSales that prompts the user for a salesperson initial (D,
+E, or F). Either uppercase or lowercase initials are valid. While the user does
+not type Z, continue by prompting for the amount of a sale. Issue an error
+message for any invalid initials entered. Keep a running total of the amounts
+sold by each salesperson. After the user types Z or z for an initial, display
+each salesperson’s total, a grand total for all sales, and the name of the
+salesperson with the highest total.
+*/
+//Programmer: ProgrammerFromMars
+
+using System;
+using static System.Console;
+namespace exercise5
+{
+  class HomeSales
+  {
+    static void Main(string[] args)
+    {
+      WriteLine("Initials:");
+      WriteLine("D - Danielle\nE - Edward\nF - Francis\n");
+      
+      // Variable Declaration
+      const char SENTINAL_VALUE = 'Z';
+      double dSalesSum = 0.0; //Store Danielle sales total
+      double eSalesSum = 0.0; //Store Edward sales total
+      double fSalesSum = 0.0; //Store Francis sales total
+      char salesPerson = ' '; //Store initial of salesperson
+      double salesAmount = 0.0; //Store sales amount per sales person
+      double grandTotal = 0.0; //Store the total of all sales
+      
+      do
+      {
+        //Get initial of the sales Person from the user
+        Write("\nEnter initial of salesperson (Z to quit) >> ");
+        salesPerson = char.ToUpper(char.Parse(ReadLine()));
+        
+        //Get sales data accordingly
+        switch(salesPerson)
+        {
+        case 'D':
+          WriteLine("\nSales Person: Danielle");
+          Write("Enter Sale >> ");
+          salesAmount = double.Parse(ReadLine());
+          dSalesSum += salesAmount;
+          break;
+        case 'E':
+          WriteLine("\nSales Person: Edward");
+          Write("Enter Sale >> ");
+          salesAmount = double.Parse(ReadLine());
+          eSalesSum += salesAmount;
+          break;
+        case 'F':
+          WriteLine("\nSales Person: Francis");
+          Write("Enter Sale >> ");
+          salesAmount = double.Parse(ReadLine());
+          fSalesSum += salesAmount;
+          break;
+        case 'Z':
+          break;
+        default:
+          WriteLine("\nError - invalid initial\n");
+          break;
+        }
+      }
+      while (salesPerson != SENTINAL_VALUE);
+      
+      //Calculate the grand total of all sales
+      grandTotal = dSalesSum + fSalesSum + eSalesSum;
+      
+      //Display sales data
+      WriteLine("\n-------------- SALES SUMMMARY ---------------- ");
+      WriteLine("Danielle Total : {0}", dSalesSum.ToString("C") );
+      WriteLine("Edwards Total : {0}", eSalesSum.ToString("C") );
+      WriteLine("Francis Total : {0}", fSalesSum.ToString("C") );
+      WriteLine(" ");
+      WriteLine("Grand Total : {0}", grandTotal.ToString("C") );
+      Write("\nMost sales : ");
+      
+      //Determine who sold the most houses
+      if(dSalesSum > eSalesSum)
+      {
+        if(dSalesSum > fSalesSum)
+        {
+        WriteLine("Danielle");
+        }
+        else
+        {
+        Write("Francis");
+        }
+      }
+      else if(eSalesSum > fSalesSum)
+      {
+        Write("Edward");
+      }
+      else
+      {
+        Write("Francis");
+      }
+   
+      ReadLine(); //System pause
+    }
+  }
+}
