@@ -1,0 +1,70 @@
+/* Exercise 11 - TippingTable3 
+In a “You Do It” section of this chapter, you created a tipping table for
+patrons to use when analyzing their restaurant bills. Now, create a modified
+program named TippingTable3 in which each of the following values is obtained
+from user input:
+• The lowest tipping percentage
+• The highest tipping percentage
+• The lowest possible restaurant bill
+• The highest restaurant bill
+*/
+//Programmer: ProgrammerFromMars
+using static System.Console;
+namespace exercise11
+{
+  class TippingTable3
+  {
+    static void Main(string[] args)
+    {
+      // Variable Declaration
+      double dinnerPrice = 10.00;
+      double tipRate;
+      double tip;
+      double lowRate = 0.10;
+      double maxRate = 0.25;
+      double maxDinner = 100.00;
+      const double TIPSTEP = 0.05;
+      const double DINNERSTEP = 10.00;
+      
+      WriteLine("(0.10 = 10%)");
+      //Get the lowest tip rate from the user
+      Write("\nEnter lowest tip rate >>");
+      lowRate = double.Parse(ReadLine());
+      
+      //Get the Max tip rate from the user
+      Write("\nEnter max tip rate >> ");
+      maxRate = double.Parse(ReadLine());
+      
+      //Get the minimum dinner price from the user
+      Write("\nEnter min dinner price >> ");
+      dinnerPrice = double.Parse(ReadLine());
+      
+      //Get the maximum dinner price from the user
+      Write("\nEnter max dinner price >>");
+      maxDinner = double.Parse(ReadLine());
+      
+      //Display the results
+      Write(" Price");
+      for (tipRate = lowRate; tipRate <= maxRate; tipRate += TIPSTEP)
+        Write("{0,8}", tipRate.ToString("F"));
+      tipRate = lowRate;
+      WriteLine();
+      WriteLine(" ");
+      while (dinnerPrice <= maxDinner)
+      {
+        Write("{0, 8}", dinnerPrice.ToString("C"));
+        while (tipRate <= maxRate)
+        {
+          tip = dinnerPrice * tipRate;
+          Write("{0,8}", tip.ToString("F"));
+          tipRate += TIPSTEP;
+        }
+        dinnerPrice += DINNERSTEP;
+        tipRate = lowRate;
+        WriteLine();
+      }
+
+      ReadLine(); //System Pause
+    }
+  }
+}
