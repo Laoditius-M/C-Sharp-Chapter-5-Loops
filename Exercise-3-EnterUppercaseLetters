@@ -1,0 +1,43 @@
+/* Exercise 3 - EnterUppercaseLetters
+Write an application named EnterUppercaseLetters that asks the user to type an
+uppercase letter from the keyboard. If the character entered is an uppercase
+letter, display OK; if it is not an uppercase letter, display an error message.
+The program continues until the user types an exclamation point.
+*/
+//Programmer: ProgrammerFromMars
+
+using System;
+using static System.Console;
+namespace exercise3
+{
+  class EnterUppercaseLetters
+  {
+    static void Main(string[] args)
+    {
+      // Variable Declaration 
+      const char SENTINAL_VALUE = '!';
+      char userInput = ' ';
+      
+      do
+      {
+        //Get a letter from the user (User Input)
+        Write("\nEnter an Uppercase Letter (! to exit) >> ");
+        userInput = char.Parse(ReadLine());
+        if(userInput != SENTINAL_VALUE)
+        {
+          if ((userInput >= 'A') && (userInput < 'Z'))
+          {
+          WriteLine("\nOK");
+          }
+          else
+          {
+          WriteLine("\n{0} is not an Uppercase Letter", userInput);
+          }
+        }
+      }
+      while (userInput != SENTINAL_VALUE) ;
+  
+      ReadLine(); //System pause
+    }
+  }
+}
