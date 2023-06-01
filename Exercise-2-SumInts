@@ -1,0 +1,43 @@
+/* Exercise 2 - SumInts 
+Write an application named SumInts that allows the user to enter any number of
+integers continuously until the user enters 999. Display the sum of the values
+entered, not including 999
+*/
+//Programmer: ProgrammerFromMars
+using System;
+using static System.Console;
+namespace exercise2
+{
+  class SumInts
+  {
+    static void Main(string[] args)
+    {
+      // Variable Declaration 
+      const int SENTINAL_VALUE = 999;
+      int sum = 0;
+      int counter = 0;
+      int userInput = 0; 
+      
+      //Calculate the sum using a loop
+      do
+      {
+        counter++;
+        //Get a number from the user (User Input)
+        Write("Enter number {0} (999 to Exit) >> \n", counter);
+        userInput = int.Parse(ReadLine());
+        
+        if (userInput == 999)
+        break; //force exit the loop before adding
+        
+        //Add number to sum
+        sum += userInput;
+      }
+      while (userInput != SENTINAL_VALUE);
+      
+      //Display the sum
+      WriteLine("\nSum: {0}", sum);
+
+      ReadLine(); //System Pause
+    }
+  }
+}
