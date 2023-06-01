@@ -1,0 +1,33 @@
+/* --------------------------- Exercise 1 - SumFiveInts --------------------------
+Write an application named SumFiveInts that allows the user to enter five
+integers and displays their sum.
+*/
+//Programmer: ProgrammerFromMars
+
+using System;
+using static System.Console;
+namespace exercise1
+{
+  class SumFiveInts
+  {
+    static void Main(string[] args)
+    {
+      // Variable Declaration
+      const int MAX_COUNT = 5;
+      int sum = 0;
+      int counter = 0;
+      
+      //Calculate the sum
+      for(counter = 0; counter < MAX_COUNT; counter++)
+      {
+        Write("Enter Number {0} >> \n", counter + 1);
+        sum += int.Parse(ReadLine());
+      }
+      
+      //Display the sum
+      WriteLine("\nSum: {0}", sum);
+    
+      ReadLine(); //System Pause
+    }
+  }
+}
